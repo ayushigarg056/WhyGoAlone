@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="nn">#eec9aae6</color>
+    <color name="nn2">#c72b47</color>
+    <color name="login">#35c72b</color>
+    <color name="google">#cc170b</color>
+    <color name="reg">#bed6d7</color>
+    <color name="main">#c60d35</color>
+
+</resources>

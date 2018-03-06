@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context="com.ayushi.user.restaurantapp.MainActivity">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wanna enjoy dinner..."
+        android:fontFamily="cursive"
+        android:textSize="30sp"
+        android:textColor="@color/main"/>
+
+    <TextView
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/main"
+        android:text="Why Go Alone, sign up here !!"
+        android:fontFamily="cursive"
+        android:layout_marginBottom="200sp"/>
+
+</LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="180sp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="4dp"
+            app:contentPadding="8dp"
+            android:foreground="?selectableItemBackground"
+            android:gravity="end"
+            app:cardBackgroundColor="@color/main"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+                <Button
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/main"
+                    android:textAllCaps="false"
+                    android:textColor="#ffff"
+                    android:textSize="30dp"
+                    android:text="Login"
+                    android:id="@+id/btnLogin"/>
+
+            </android.support.v7.widget.CardView>
+
+
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="180sp"
+            android:layout_marginTop="20dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="4dp"
+            app:contentPadding="8dp"
+            android:foreground="?selectableItemBackground"
+            android:gravity="end"
+            app:cardBackgroundColor="@color/main"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp">
+
+        <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/main"
+                    android:textAllCaps="false"
+                    android:textSize="30dp"
+                    android:textColor="#ffff"
+                    android:text="Signup"
+                    android:id="@+id/btnSignup"/>
+
+            </android.support.v7.widget.CardView>
+
+
+    </LinearLayout>
+</LinearLayout>

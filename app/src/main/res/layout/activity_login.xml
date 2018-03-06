@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:background="@drawable/v"
+android:alpha="0.9"
+tools:context="com.ayushi.user.restaurantapp.Login">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:weightSum="1">
+            <TextView
+                android:layout_marginTop="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="40dp"
+                android:text="Login Here!!!"
+                />
+        <EditText
+                android:id="@+id/mail"
+                android:layout_width="271dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="40dp"
+                android:hint="Email"
+                android:padding="10dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/border"
+                android:singleLine="true"
+                android:textColor="#fff"
+                android:drawableLeft="@drawable/mail"
+                android:drawablePadding="20dp"
+                android:textColorHint="#fff"
+                />
+
+            <EditText
+                android:id="@+id/pass"
+                android:layout_width="271dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="25dp"
+                android:hint="Password"
+                android:padding="10dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/border"
+                android:textColorHint="#fff"
+                android:singleLine="true"
+                android:textColor="#fff"
+                android:drawableLeft="@drawable/paas"
+                android:drawablePadding="20dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="271dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="25dp"
+                android:textSize="25dp"
+                android:layout_marginTop="25dp"
+                android:text="LOGIN"
+                android:padding="20dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/border1"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:singleLine="true"
+                />
+            <TextView
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/signup"
+                android:layout_marginTop="20dp"
+                android:textColor="#ffff"
+                android:text="Sign Up if not registered.."
+                android:textSize="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="45dp" />
+            <TextView
+
+                android:id="@+id/fb"
+                android:layout_width="271dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="25dp"
+                android:textSize="15dp"
+                android:textColor="#fff"
+                android:layout_marginTop="25dp"
+                android:text="LOGIN WITH FACEBOOK"
+                android:padding="20dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/fb"
+                android:singleLine="true"
+                android:drawableLeft="@drawable/ff"
+                android:drawablePadding="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                />
+
+            <TextView
+                android:id="@+id/google"
+                android:layout_width="271dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="25dp"
+                android:textSize="15dp"
+                android:layout_marginTop="25dp"
+                android:text="LOGIN WITH GOOGLE"
+                android:padding="20dp"
+                android:layout_marginRight="25dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textColor="#fff"
+                android:background="@drawable/google"
+                android:singleLine="true"
+                android:drawableLeft="@drawable/gg"
+
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="20dp" />
+        </LinearLayout>
+
+    </ScrollView>
