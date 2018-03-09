@@ -64,6 +64,11 @@ public class Registration extends AppCompatActivity {
     private String userChoosenTask;
     String imageString;
     FileOutputStream fo;
+    private int PICK_IMAGE_REQUEST = 1;
+    private static final int CAMERA_REQUEST = 1888;
+    ByteArrayOutputStream bytearrayoutputstream;
+    File file;
+    FileOutputStream fileoutputstream;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -178,10 +183,10 @@ public class Registration extends AppCompatActivity {
             return;
         }
 
-        if (userPicUri == null){
-            Toast.makeText(Registration.this, "Please Upload Profile Picture", Toast.LENGTH_SHORT).show();
-            return;
-        }
+//        if (userPicUri == null){
+//            Toast.makeText(Registration.this, "Please Upload Profile Picture", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         pg.setMessage("Registering Please Wait...");
         pg.show();
 
@@ -221,16 +226,16 @@ public class Registration extends AppCompatActivity {
         builder.setItems(items, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int item) {
-                boolean result=Utility.checkPermission(Registration.this);
+              //  boolean result=Utility.checkPermission(Registration.this);
 
                 if (items[item].equals("Take Photo")) {
                     userChoosenTask ="Take Photo";
-                    if(result)
+                   // if(result)
                         cameraIntent();
 
                 } else if (items[item].equals("Choose from Library")) {
                     userChoosenTask ="Choose from Library";
-                    if(result)
+                   // if(result)
                         galleryIntent();
 
                 } else if (items[item].equals("Cancel")) {
@@ -245,113 +250,76 @@ public class Registration extends AppCompatActivity {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select File"),SELECT_FILE);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
+        uploadImage(userPicUri);
     }
 
     private void cameraIntent()
-    {
-//        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-//        startActivityForResult(intent, REQUEST_CAMERA);
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(getPackageManager()) != null) {
-            File photoFile = null;
-            try {
-                photoFile = createImageFile();
-            } catch (IOException ex) {
-            }
-            if (photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this,"com.ayushi.user.restaurantapp",
-                        //"com.example.android.fileprovider",
-                        photoFile);
-                userPicUri = photoURI;
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                startActivityForResult(cameraIntent, REQUEST_CAMERA);
-            }
-        }
+    {    Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+//                imageUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),"fname_" +
+//                        String.valueOf(System.currentTimeMillis()) + ".jpg"));
+        cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, file);
+//                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));uuu
+        startActivityForResult(cameraIntent, CAMERA_REQUEST);
+        uploadImage(userPicUri);
     }
 
-    String mCurrentPhotoPath;
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
-                storageDir      /* directory */
-        );
 
-        // Save a file: path for use with ACTION_VIEW intents
-        mCurrentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data);
-        }
-    }
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
-    private void onCaptureImageResult(Intent data) {
-        Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
-//        picture=thumbnail;
-//            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-//           thumbnail.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-//            String path = MediaStore.Images.Media.insertImage(getContentResolver(), thumbnail, "Title", null);
-//            filePath= Uri.parse(path);
+            userPicUri = data.getData();
+            Log.d("uri1", "onClick: " + userPicUri);
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),userPicUri);
 
-        img.setImageBitmap(thumbnail);
-        uploadImage(userPicUri);
-    }
-
-    @SuppressWarnings("deprecation")
-    private void onSelectFromGalleryResult(Intent data) {
-//
-//        Bitmap bm=null;
-//        if (data != null) {
-//            try {
-//                Uri image = data.getData();
-//                //Uri resultUri = image.getUri();
-//                bm = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), data.getData());
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//                Toast.makeText(Registration.this, "Something went wrong", Toast.LENGTH_LONG).show();
-//
-//            }
-//        }
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bm.compress(Bitmap.CompressFormat.JPEG,100,baos);
-//
-//        String path = MediaStore.Images.Media.insertImage(getApplication().getContentResolver(),bm, "Title", null);
-//        Uri u= Uri.parse(path);
-//        userPicUri=u;
-//        Log.d("uri", "onClick: " + u);
-//        Log.d("uri1", "onClick: " + userPicUri);
-//
-//        // photosList.add(bm);
-//        img.setImageBitmap(bm);
-        userPicUri = data.getData();
-
-        try {
-            Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), userPicUri);
-            //picture=bitmap;
-            img.setImageBitmap(bitmap);
-            uploadImage(userPicUri);
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
+                img.setImageBitmap(bitmap);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
 
+        if (requestCode == CAMERA_REQUEST && resultCode == Activity.RESULT_OK) {
+            Bitmap photo = (Bitmap) data.getExtras().get("data");
+            img.setImageBitmap(photo);
+
+            photo.compress(Bitmap.CompressFormat.PNG, 60, bytearrayoutputstream);
+
+            file = new File( Environment.getExternalStorageDirectory() + "/SampleImage.png");
+
+            try
+
+            {
+                file.createNewFile();
+
+                fileoutputstream = new FileOutputStream(file);
+
+                fileoutputstream.write(bytearrayoutputstream.toByteArray());
+
+                fileoutputstream.close();
+
+            }
+
+            catch (Exception e)
+
+            {
+
+                e.printStackTrace();
+
+            }
+
+            Toast.makeText(Registration.this, "Image Saved Successfully", Toast.LENGTH_LONG).show();
+            userPicUri=  Uri.fromFile(file);
+           Log.d("uri", "onClick: " +Uri.fromFile(file));
+
+        }
 
     }
+
 
     private void uploadImage(Uri uri){
         Log.d("uri2", "onClick: " + uri);
@@ -361,7 +329,7 @@ public class Registration extends AppCompatActivity {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading Image...");
 
-            StorageReference profileRef = storageReference.child("profileImages/" + mail);
+            StorageReference profileRef = storageReference.child("profileImages/"+" ");
 
             final Bitmap noUse = null;
 

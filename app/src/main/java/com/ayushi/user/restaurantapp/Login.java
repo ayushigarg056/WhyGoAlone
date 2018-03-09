@@ -43,7 +43,7 @@ public class Login extends AppCompatActivity {
             }
         });
         pg=new ProgressDialog(this);
-
+        fauth=FirebaseAuth.getInstance();
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

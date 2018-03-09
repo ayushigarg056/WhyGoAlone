@@ -18,12 +18,7 @@ android {
         }
     }
 }
-allprojects {
-    repositories {
-        maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
-        maven { url 'https://jitpack.io' }
-    }
-}
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -40,7 +35,7 @@ dependencies {
     compile 'com.google.firebase:firebase-auth:11.0.4'
     compile 'com.google.firebase:firebase-storage:11.0.4'
     compile 'com.google.firebase:firebase-database:11.0.4'
-    compile 'com.github.ParkSangGwon:TedPicker:v1.0.10'
+
     testCompile 'junit:junit:4.12'
 }
 
